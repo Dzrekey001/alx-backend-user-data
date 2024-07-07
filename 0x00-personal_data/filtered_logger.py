@@ -16,15 +16,6 @@ def filter_datum(fields: List[str], redaction: str,
 
     Returns:
         str: The log message with specified fields obfuscated.
-
-    Example:
-        fields = ["name", "email"]
-        redaction = "REDACTED"
-        message = "name=John Doe; email=john.doe@example.com; age=30"
-        separator = "; "
-
-        obfuscated_message = filter_datum(fields, redaction, message,separator)
-        # Output: "name=REDACTED; email=REDACTED; age=30"
     """
     pattern = f"({'|'.join(fields)})=[^{separator}]*"
     return re.sub(pattern, lambda m: f"{m.group(1)}={redaction}", message)
