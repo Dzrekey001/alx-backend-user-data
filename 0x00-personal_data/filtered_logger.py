@@ -37,6 +37,22 @@ class RedactingFormatter(logging.Formatter):
         self.fields = fields
 
     def format(self, record: logging.LogRecord) -> str:
+        """
+        Format the specified record as text, with redacted
+        sensitive information.
+
+        This method overrides the base class method to add functionality
+        for redacting specified fields in the log message. It uses the
+        filter_datum function to replace sensitive field values with a
+        redaction string before formatting the log record.
+
+        Args:
+            record (logging.LogRecord): The log record to be formatted.
+
+        Returns:
+            str: The formatted log record as a string with sensitive
+            fields redacted.
+        """
         record.msg = filter_datum(self.fields, self.REDACTION,
                                   record.getMessage(), self.SEPARATOR)
         return super(RedactingFormatter, self).format(record)
