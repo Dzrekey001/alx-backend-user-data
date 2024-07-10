@@ -30,9 +30,12 @@ class Auth:
         """Check for authoriztion in the request header
         Returns:
             - None if request is none
-            - Flask object
+            - Authorization value
         """
-        return None
+        if request is None or request.headers.get("Authorization") is None:
+            return None
+
+        return request.headers.get("Authorization")
 
     def current_user(self, request=None) -> TypeVar('User'):
         """Fetch authorized User
