@@ -17,6 +17,9 @@ auth = None
 if os.getenv("AUTH_TYPE") == "auth":
     from .auth.auth import Auth
     auth = Auth()
+elif os.getenv("AUTH_TYPE") == "basic_auth":
+    from .auth.basic_auth import BasicAuth
+    auth = Auth()
 
 
 @app.before_request
