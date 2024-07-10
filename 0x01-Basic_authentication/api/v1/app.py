@@ -19,7 +19,7 @@ if os.getenv("AUTH_TYPE") == "auth":
     auth = Auth()
 
 
-@app.before_request()
+@app.before_request
 def before_request():
     '''Before request function for authorization'''
     if auth is None:
