@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Inherits from Auth to create a basic Auth"""
 from api.v1.auth.auth import Auth
-from typing import TypeVar
+from typing import TypeVar, List
 from models.user import User
 
 
@@ -73,8 +73,7 @@ class BasicAuth(Auth):
         except Exception as e:
             return (None, None)
 
-    def user_object_from_credentials(self, user_email: str,
-                                     user_pwd: str) -> TypeVar('User'):
+    def user_object_from_credentials(self, user_email: str, user_pwd: str) -> TypeVar('User'): # nopep8
         """Fetches the user object based on email and password.
 
         Args:
@@ -91,7 +90,7 @@ class BasicAuth(Auth):
         if user_pwd is None or not isinstance(user_pwd, str):
             return None
         try:
-            users = user().search({"email": user_email})
+            users: List[TypeVar("User")] = User().search({"email": user_email})
         except Exception:
             return None
 
