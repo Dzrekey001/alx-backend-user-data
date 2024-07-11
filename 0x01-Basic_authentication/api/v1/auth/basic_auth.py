@@ -102,3 +102,10 @@ class BasicAuth(Auth):
                 return user_obj
 
         return None
+
+    def current_user(self, request=None) -> TypeVar('User'):
+        header = Auth().authorization_header(request)
+        b64_header = self.extract_base64_authorization_header(header)
+        decoded_auth = self.decode_base64_authorization_header(b64_header)
+        email, pwd = self.extract_base64_authorization_header(decoded_auth)
+        return self.user_object_from_credentials(email, pwd)
