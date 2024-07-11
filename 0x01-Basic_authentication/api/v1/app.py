@@ -19,7 +19,7 @@ if os.getenv("AUTH_TYPE") == "auth":
     auth = Auth()
 elif os.getenv("AUTH_TYPE") == "basic_auth":
     from .auth.basic_auth import BasicAuth
-    auth = Auth()
+    auth = BasicAuth()
 
 
 @app.before_request
