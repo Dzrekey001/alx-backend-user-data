@@ -13,16 +13,26 @@ class Auth:
             - True if path requires authentication
             - False if not
         """
-        if path is not None and excluded_paths is not None and len(excluded_paths) > 0:  # nopep8
-            if path.endswith('/'):
-                path = path[:-1]
-            for excluded_path in excluded_paths:
-                if fnmatch.fnmatch(path, excluded_path):
+        if path is None:
+            return True
+        if excluded_paths is None or len(excluded_paths) == 0:
+            return True
+        if path in excluded_paths or (path + '/') in excluded_paths:
+            return False
+
+        # using regex to match paths with asterik sign
+        # checking for any match between the provided
+        # match and the excluded path
+
+        # matching the ends of the urls i.e end part of the url
+        end_input_url = path.split('/', 3)[-1]
+        for paths in excluded_paths:
+            if "*" in paths:
+                end_match_url = paths.split('/', 3)[-1].replace("*", "")
+                sim = re.search(f"^{end_match_url}", end_input_url)
+                if sim:
                     return False
-                if excluded_path.endswith('/'):
-                    excluded_path = excluded_path[:-1]
-                if excluded_path == path:
-                    return False
+
         return True
 
     def authorization_header(self, request=None) -> str:
