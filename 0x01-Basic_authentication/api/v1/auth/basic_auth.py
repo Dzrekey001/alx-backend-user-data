@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Inherits from Auth to create a basic Auth"""
-from api.v1.auth.auth import Authi
+from api.v1.auth.auth import Auth
 from typing import TypeVar
 from models.user import User
 
