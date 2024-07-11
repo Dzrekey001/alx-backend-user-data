@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Inherits from Auth to create a basic Auth"""
-from .auth import Auth
+from api.v1.auth.auth import Auth
 
 
 class BasicAuth(Auth):
@@ -62,11 +62,11 @@ class BasicAuth(Auth):
         """
 
         if decoded_base64_authorization_header is None:
-            return None
+            return(None, None)
         if not isinstance(decoded_base64_authorization_header, str):
-            return None
+            return (None, None)
         try:
             name, pwd = decoded_base64_authorization_header.split(":", 1)
             return name, pwd
-        except ValueError:
-            return None
+        except Exception as e:
+            return (None, None)
