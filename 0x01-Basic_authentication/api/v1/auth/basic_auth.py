@@ -73,7 +73,7 @@ class BasicAuth(Auth):
         except Exception as e:
             return (None, None)
 
-    def user_object_from_credentials(self, user_email: str, user_pwd: str) -> TypeVar('User'): # nopep8
+    def user_object_from_credentials(self, user_email: str, user_pwd: str) -> TypeVar('User'):  # nopep8
         """Fetches the user object based on email and password.
 
         Args:
