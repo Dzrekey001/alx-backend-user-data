@@ -68,7 +68,7 @@ class DB:
         except Exception:
             raise ValueError
 
-        for key in kwargs:
+        for key, value in kwargs.items():
             if hasattr(user, key):
                 setattr(user, key, value)
             else:
