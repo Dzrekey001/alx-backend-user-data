@@ -27,8 +27,8 @@ class Auth:
             ValueError if user already exist base on email.
             Return user object on success.
         """
-        user = self._db.find_user_by(email=email)
         hash_pwd = _hash_password(password)
+        user = self._db.find_user_by(email=email)
         if user:
             raise ValueError(f"User {email} already exists")
         return self._db.add_user(email, hash_pwd)
