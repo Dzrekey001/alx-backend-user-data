@@ -59,11 +59,12 @@ class DB:
 
         return user
 
-    def update_user(self, user_id, **kwargs) -> None:
+    def update_user(self, user_id: int, **kwargs) -> None:
         """user’s attributes as passed in the method’s arguments
         then commit changes to the database.
         """
         try:
+            id = user_id
             user = self.find_user_by(id=user_id)
         except Exception:
             raise ValueError
