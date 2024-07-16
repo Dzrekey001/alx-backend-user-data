@@ -2,6 +2,7 @@
 import bcrypt
 from user import User
 from db import DB
+from typing import TypeVar
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.exc import InvalidRequestError
 
