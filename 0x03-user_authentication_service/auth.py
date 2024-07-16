@@ -28,7 +28,7 @@ class Auth:
             Return user object on success.
         """
         user = self._db.find_user_by(email=email)
+        hash_pwd = _hash_password(password)
         if user:
             raise ValueError(f"User {email} already exists")
-        hash_pwd = _hash_password(password)
         return self._db.add_user(email, hash_pwd)
