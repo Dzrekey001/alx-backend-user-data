@@ -69,8 +69,8 @@ class DB:
             raise ValueError
 
         for key in kwargs:
-            if not hasattr(user, key):
-                raise ValueError
-        for key, value in kwargs.items():
-            setattr(user, key, value)
+            if hasattr(user, key):
+                setattr(user, key, value)
+            else:
+                return ValueError
         return None
