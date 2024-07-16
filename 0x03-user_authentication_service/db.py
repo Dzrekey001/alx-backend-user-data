@@ -72,5 +72,4 @@ class DB:
             if hasattr(user, key):
                 setattr(user, key, value)
             else:
-                return ValueError
-        return None
+                raise ValueError
