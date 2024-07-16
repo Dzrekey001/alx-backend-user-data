@@ -27,7 +27,6 @@ class Auth:
             ValueError if user already exist base on email.
             Return user object on success.
         """
-        
         user = self._db.find_user_by(email=email)
         hash_pwd = _hash_password(password)
         if user:
