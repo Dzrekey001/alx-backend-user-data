@@ -21,13 +21,13 @@ class Auth:
         self._db = DB()
 
     def register_user(self, email: str, password: str) -> User:
-        """
-        Hash the password using _hash_password,and save
+        """Hash the password using _hash_password,and save
         the user to the database
         Return:
             ValueError if user already exist base on email.
             Return user object on success.
         """
+        
         user = self._db.find_user_by(email=email)
         hash_pwd = _hash_password(password)
         if user:
