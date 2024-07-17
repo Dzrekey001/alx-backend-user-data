@@ -128,6 +128,6 @@ class Auth:
             hashed_pwd = _hash_password(password)
             self._db.update_user(user.id, hashed_password=hashed_pwd,
                                  reset_token=None)
-        except NoRultFound:
+        except NoResultFound:
             raise ValueError
         return None
