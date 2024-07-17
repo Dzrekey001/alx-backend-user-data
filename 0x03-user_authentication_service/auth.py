@@ -115,13 +115,8 @@ class Auth:
         return token
 
     def update_password(self, reset_token: str, password: str) -> None:
-        """Takes reset_token string as argument and a password string.
-        The reset_token is used to find the correspondiing user and it's
-        password is set withe the new password.
-
-        Return:
-            - None on success.
-            -  ValueError on failure.
+        """
+        update_password.
         """
         try:
             user = self._db.find_user_by(reset_token=reset_token)
@@ -130,4 +125,3 @@ class Auth:
                                  reset_token=None)
         except NoResultFound:
             raise ValueError
-        return None
