@@ -46,11 +46,14 @@ def logout():
     if session_id:
         try:
             user = AUTH.get_user_from_session_id(session_id)
-            AUTH.destroy_session(user.id)
+            if user is not None:
+                AUTH.destroy_session(user.id)
+            else:
+                raise ValueError
         except Exception:
             abort(403)
-    redirect(url_for("home"))
-
+        redirect(url_for("home"))
+    abort(403)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")
