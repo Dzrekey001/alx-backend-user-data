@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Basic Flask app"""
-from flask import Flask, jsonify, request, abort
+from flask import Flask, jsonify, request, abort, redirect, url_for
 from auth import Auth
 
 
@@ -38,6 +38,18 @@ def login():
         return response
     else:
         abort(401)
+
+
+@app.route("/sessions", methods=["DELETE"], strict_slashes=False)
+def logout():
+    session_id = request.headers.get("session_id")
+    if session_id:
+        try:
+            user = Auth.get_user_from_session_id(session_id)
+            Auth.destroy_session(user.id)
+        except Exception:
+            abort(403)
+    redirect(url_for("home"))
 
 
 if __name__ == "__main__":
