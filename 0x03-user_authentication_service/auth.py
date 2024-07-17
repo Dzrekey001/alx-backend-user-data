@@ -3,9 +3,12 @@ import bcrypt
 from user import User
 from uuid import uuid4
 from db import DB
-from typing import TypeVar
+from typing import TypeVar, Union
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.exc import InvalidRequestError
+
+T = TypeVar("T", bound="User")
+TypeUser = Union[T, None]
 
 
 def _hash_password(password: str) -> bytes:
@@ -66,3 +69,17 @@ class Auth:
             return sess_id
         except NoResultFound:
             return
+
+    def get_user_from_session_id(self, session_id: str) -> TypeUser:
+        """Takes a single session_id
+        Return:
+            User on success
+            None on failure
+        """
+        if session_id is None:
+            return None
+        try:
+            user = self._db.find_user_by(session_id=session_id)
+            return user
+        except Exception:
+            return None
