@@ -60,7 +60,7 @@ class DB:
         return user
 
     def update_user(self, user_id: int, **kwargs) -> None:
-        """user’s attributes as passed in the method’s arguments
+        """update user attributes as passed in the method’s arguments
         then commit changes to the database.
         """
         try:
